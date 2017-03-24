@@ -1,0 +1,12 @@
+// # forward zone
+zone "chaubet" {
+        type master;
+        file "/etc/bind/zones/db.chaubet";
+};
+
+// # reverse zone
+zone "10.10.in-addr.arpa" {
+        type master;
+        notify no;
+        file "/etc/bind/zones/db.10";
+};
