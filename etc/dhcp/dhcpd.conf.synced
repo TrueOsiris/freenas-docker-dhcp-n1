@@ -1,0 +1,344 @@
+subnet 10.10.0.0 netmask 255.255.0.0 {
+        # Servers
+        pool {
+                failover peer                   "dhcp-failover";
+                option domain-name-servers      10.10.20.20, 10.10.0.21;
+                option netbios-name-servers     10.10.20.20, 10.10.0.21;
+                range                           10.10.0.1 10.10.0.254;
+                option routers                  10.10.0.99;
+                deny unknown-clients;
+
+                host nas-nic1 {
+                        hardware ethernet       00:08:9b:d1:02:c0;
+                        fixed-address           10.10.0.1;
+                        option host-name        "horus";
+                }
+                host nas-nic2 {
+                        hardware ethernet       00:08:9b:d1:02:c1;
+                        fixed-address           10.10.0.2;
+                }
+                host nas3-seth {
+                        hardware ethernet       bc:5f:f4:ac:a3:84;
+                        fixed-address           10.10.0.3;
+                        option host-name        "nas3";
+                }
+                host nas5-check {
+                        hardware ethernet       BC:5F:F4:FE:1A:DC;
+                        fixed-address           10.10.0.5;
+                        option host-name        "nas5boot";
+                }
+                host nas5 {
+                        hardware ethernet       d0:50:99:19:2c:ef;
+                        fixed-address           10.10.0.6;
+                        option host-name        "ra";
+                }
+                host nas5-bond {
+                        hardware ethernet       d0:50:99:19:2c:f0;
+                        fixed-address           10.10.0.7;
+                        option host-name        "nas5bond";
+                }
+                host succ-onb1 {
+                        hardware ethernet       00:24:1d:c0:7f:2a;
+                        fixed-address           10.10.0.11;
+                        option host-name        "succubus";
+                }
+                host succ-inthigh {
+                        hardware ethernet       00:1b:21:8f:62:57;
+                        fixed-address           10.10.0.13;
+                        option host-name        "succubusB";
+                }
+                host succ-intlow {
+                        # ### ALSO LAGG ###
+                        hardware ethernet       00:1b:21:8d:b1:41;
+                        fixed-address           10.10.0.14;
+                        option host-name        "succubusC";
+                }
+                host rasp1 {
+                        hardware ethernet       b8:27:eb:0e:de:64;
+                        fixed-address           10.10.0.20;
+                        option host-name        "rasp1";
+                }
+                host rasp2 {
+                        hardware ethernet       b8:27:eb:b9:e2:02;
+                        fixed-address           10.10.0.21;
+                        option host-name        "rasp2";
+                }
+                host spotweb {
+                        #hardware ethernet      08:00:27:84:57:2a;
+                        #hardware ethernet      08:00:27:ed:38:26;
+                        hardware ethernet       08:00:27:84:a4:3b;
+                        fixed-address           10.10.0.30;
+                        option host-name        "spotweb";
+                }
+                host telN300a {
+                        hardware ethernet       7c:2f:80:5c:ac:9a;
+                        fixed-address           10.10.0.100;
+                        option host-name        "telN300a";
+                }
+                host Belkin1_range_extender {
+                        hardware ethernet       b4:75:0e:96:b3:80;
+                        fixed-address           10.10.0.101;
+                        option host-name        "Belkin1";
+                }
+                host raspbmc {
+                        hardware ethernet       b8:27:eb:f9:a7:4d;
+                        fixed-address           10.10.0.110;
+                        option host-name        "raspbmc";
+                }
+                host imap {
+                        #hardware ethernet      08:00:27:6e:ad:bc;
+                        #hardware ethernet      08:00:27:0d:e1:f5;
+                        hardware ethernet       08:00:27:18:49:11;
+                        fixed-address           10.10.0.242;
+                        option host-name        "imap";
+                }
+
+        # KNX
+                host knx_ip_interface {
+                        hardware ethernet       00:0e:8c:01:43:69;
+                        fixed-address           10.10.0.180;
+                        option host-name        "knxip";
+                }
+
+        # Ethernet devices (in the server pool)
+                host lanswitch {
+                        #hardware ethernet      5c:96:9d:a2:88:72;
+                        hardware ethernet       5c:a4:8a:79:3e:0c;
+                        fixed-address           10.10.0.250;
+                        option host-name        "lanswitch";
+                }
+        }
+
+        pool {
+        # Desktops and client systems
+                failover peer                   "dhcp-failover";
+                range                           10.10.1.1 10.10.1.99;
+                deny unknown-clients;
+                option domain-name-servers      10.10.20.20, 10.10.0.21;
+                option netbios-name-servers     10.10.20.20, 10.10.0.21;
+                option routers                  10.10.0.99;
+
+                host console {
+                        #hardware ethernet      08:00:27:7b:b9:ca;
+                        #hardware ethernet      08:00:27:27:28:BE;
+                        hardware ethernet       08:00:27:fd:1a:e7;
+                        fixed-address           10.10.1.1;
+                        option host-name        "console1";
+                }
+                host console2 {
+                        #hardware ethernet      08:00:27:DE:22:81;
+                        hardware ethernet       08:00:27:8c:09:aa;
+                        fixed-address           10.10.1.2;
+                        option host-name        "console2";
+                }
+                host console3 {
+                        #hardware ethernet      08:00:27:6F:DC:34;
+                        #hardware ethernet      00:0c:29:9e:6c:5a;
+                        hardware ethernet       08:00:27:06:b6:bd;
+                        fixed-address           10.10.1.3;
+                        option host-name        "console3";
+                }
+                host linux-desktop1 {
+                        hardware ethernet       08:00:27:bf:a3:f9;
+                        fixed-address           10.10.1.5;
+                }
+                host Osiris-pc1 {
+                        hardware ethernet       90:E6:BA:54:22:B7;
+                        fixed-address           10.10.1.10;
+                }
+                host Osiris-pc1-nic2 {
+                        hardware ethernet       00:0E:2E:83:ED:4C;
+                        fixed-address           10.10.1.11;
+                }
+                host Osiris-pc2 {
+                        hardware ethernet       C8:60:00:15:25:1D;
+                        fixed-address           10.10.1.12;
+                }
+                host pc-katleen {
+                        hardware ethernet       00:24:D7:BE:BC:EC;
+                        fixed-address           10.10.1.40;
+                }
+        # game consoles
+                host wii-tim {
+                        hardware ethernet       00:1f:32:6a:8e:5f;
+                        fixed-address           10.10.1.50;
+                }
+                #host wii-bert {
+                #       hardware ethernet       e8:4e:ce:5f:47:54;
+                host nintendo-helena {
+                        hardware ethernet       40:d2:8a:2d:a1:3c;
+                        fixed-address           10.10.1.51;
+                }
+                host wii-marcel {
+                        hardware ethernet       00:1e:35:e7:3b:af;
+                        fixed-address           10.10.1.52;
+                }
+        # media devices
+                host xbmc {
+                        hardware ethernet       08:00:27:d9:b4:04;
+                        fixed-address           10.10.1.56;
+                }
+                host chromebox1 {
+                        hardware ethernet       3c:a8:2a:a6:0c:35;
+                        fixed-address           10.10.1.60;
+                        option host-name        "ChromeBox1";
+                }
+                host chromebox2 {
+                        hardware ethernet       3c:a8:2a:a6:0c:31;
+                        fixed-address           10.10.1.61;
+                        option host-name        "ChromeBox2";
+                }
+                host kodijail {
+                        hardware ethernet       02:81:80:00:0f:0b;
+                        fixed-address           10.10.1.62;
+                        option host-name        "kodijail";
+                }
+                host raspcam-wired {
+                        hardware ethernet       b8:27:eb:cd:99:c9;
+                        fixed-address           10.10.1.75;
+                        option host-name        "raspcam1l";
+                }
+                host raspcam-wlan {
+                        hardware ethernet       00:0f:13:40:0f:3d;
+                        fixed-address           10.10.1.76;
+                        option host-name        "raspcam1w";
+                }
+        }
+        # printers & just LAN access
+        pool {
+                failover peer                   "dhcp-failover";
+                range                           10.10.1.100 10.10.1.120;
+                option domain-name-servers      10.10.20.20, 10.10.0.21;
+                option netbios-name-servers     10.10.20.20, 10.10.0.21;
+                deny unknown-clients;
+                host wxp-test2 {
+                        hardware ethernet       08:00:27:27:29:1A;
+                        fixed-address           10.10.1.102;
+                }
+                host canon-mp640 {
+                        hardware ethernet       00:1e:8f:47:cf:b9;
+                        fixed-address           10.10.1.111;
+                        option host-name        "canon-mp640";
+                }
+        }
+        # NEW POOL
+        pool {
+        # Laptops
+                failover peer                   "dhcp-failover";
+                range                           10.10.3.1 10.10.3.149;
+                deny unknown-clients;
+                option routers                  10.10.0.99;
+                option domain-name-servers      10.10.20.20, 10.10.0.21;
+                option netbios-name-servers     10.10.20.20, 10.10.0.21;
+
+                host laptop-tim-wired {
+                        hardware ethernet       34:E6:D7:20:46:4B;
+                        #hardware ethernet      5c:26:0a:2f:5c:28;
+                        fixed-address           10.10.3.1;
+                }
+                host laptop-tim-wireless {
+                        #hardware ethernet      58:94:6b:88:4a:dc;
+                        hardware ethernet       48:51:b7:95:44:6c;
+                        fixed-address           10.10.3.2;
+                }
+                host laptop-katleen-wired {
+                        hardware ethernet       d4:c9:ef:f7:69:a3;
+                        fixed-address           10.10.3.3;
+                }
+                host laptop-katleen-wireless {
+                        hardware ethernet       b4:b6:76:cb:75:96;
+                        fixed-address           10.10.3.4;
+                }
+                host laptop-stefan {
+                        hardware ethernet       5c:26:0a:19:4a:84;
+                        fixed-address           10.10.3.15;
+                }
+        # mobiles
+                host iPhone-Tim {
+                        hardware ethernet       7c:fa:df:c9:b5:f4;
+                        fixed-address           10.10.3.30;
+                }
+                host iPad-Katleen {
+                        hardware ethernet       cc:78:5f:f1:3b:20;
+                        fixed-address           10.10.3.31;
+                }
+        # cabs
+                host gauntlet {
+                        hardware ethernet       00:24:1d:d0:37:09;
+                        fixed-address           10.10.3.101;
+                }
+        }
+
+        # jails
+        pool {
+                failover peer                   "dhcp-failover";
+                range                           10.10.20.1 10.10.21.254;
+                deny unknown-clients;
+                option domain-name-servers      10.10.20.20, 10.10.0.21;
+                option netbios-name-servers     10.10.20.20, 10.10.0.21;
+                option routers                  10.10.0.99;
+
+                host zimbra {
+                        hardware ethernet       02:b7:0f:00:18:0b;
+                        fixed-address           10.10.20.12;
+                }
+                host puppetmaster {
+                        hardware ethernet       02:0b:d7:00:17:0b;
+                        fixed-address           10.10.20.80;
+                }
+                host vbox2 {
+                        hardware ethernet       02:c3:93:00:0f:0b;
+                        fixed-address           10.10.21.2;
+                }
+        }
+        # docker containers
+        pool {
+                failover peer                   "dhcp-failover";
+                range                           10.10.30.1 10.10.31.254;
+                deny unknown-clients;
+                option domain-name-servers      10.10.20.20, 10.10.0.21;
+                option netbios-name-servers     10.10.20.20, 10.10.0.21;
+                option routers                  10.10.0.99;
+
+                host sabnzbd {
+                        hardware ethernet       02:a0:98:74:e8:8b;
+                        fixed-address           10.10.30.1;
+                        option host-name        "sabnzbd";
+                }
+                host dockerhost-seth-mgt {
+                        hardware ethernet       02:a0:98:47:1c:19;
+                        fixed-address           10.10.30.100;
+                }
+                host dockerhost-seth-bridge {
+                        hardware ethernet       02:a0:98:ac:9b:a0;
+                        fixed-address           10.10.30.101;
+                }
+        }
+        # vms
+        pool {
+                failover peer                   "dhcp-failover";
+                range                           10.10.32.1 10.10.33.254;
+                deny unknown-clients;
+                option domain-name-servers      10.10.20.20, 10.10.0.21;
+                option netbios-name-servers     10.10.20.20, 10.10.0.21;
+                option routers                  10.10.0.99;
+
+                host ub-server {
+                        hardware ethernet       02:a0:98:44:f3:e2;
+                        fixed-address           10.10.32.1;
+                }
+        }
+
+        # NEW POOL
+        # Unknown clients
+        pool {
+                failover peer                   "dhcp-failover";
+                default-lease-time              604800;
+                max-lease-time                  12096000;
+                range                           10.10.240.10 10.10.240.254;
+                option routers                  10.10.0.99;
+                option domain-name-servers      8.8.8.8, 8.8.4.4;
+                                                #208.67.222.222, 208.67.220.220;
+                allow unknown-clients;
+        }
+}
