@@ -12,5 +12,5 @@ RUN mkdir /etc/rsync
 RUN touch /var/lib/dhcp/dhcpd.leases
 VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync"]
 
-
 ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
+ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--no-detach"]
