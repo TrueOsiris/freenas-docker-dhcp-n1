@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+MAINTAINER tim@chaubet.be
+
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
