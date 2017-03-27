@@ -12,9 +12,10 @@ RUN apt-get update \
  && apt-get install -y bind \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* 
+RUN mkdir /script/
 RUN mkdir /etc/rsync
 RUN touch /var/lib/dhcp/dhcpd.leases
-VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync"]
+VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
 
 ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
