@@ -3,7 +3,7 @@
 # USE the trap if you need to also do manual cleanup after the service is stopped,
 #     or need to start multiple services in the one container
 ECHO "running /script/dns_dhcp.sh"
-LABEL Description="This image is used to launch the isc-dhcp-server & the bind9 named/dns server" Version="1.0"
+LABEL description="This image is used to launch the isc-dhcp-server & the bind9 named/dns server" version="1.0" maintainer="tim@chaubet.be"
 trap "echo TRAPed signal" HUP INT QUIT TERM
 
 # start service in background here
