@@ -18,8 +18,8 @@ read
 # stop service and clean up here
 #echo "stopping apache"
 #/usr/sbin/apachectl stop
-/usr/bin/rsync stop
 service isc-dhcp-server stop
 service bind9 stop
+kill `ps -axwu | grep -e [r]sync | awk '{print $2}'` 2> /dev/null
 
 echo "exited $0"
