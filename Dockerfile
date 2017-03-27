@@ -6,12 +6,12 @@ FROM ubuntu:latest
 LABEL description="This image is used to launch the isc-dhcp-server & the bind9 named/dns server" version="1.0" maintainer="tim@chaubet.be"
 USER root
 
-RUN mkdir /script/ \
- && mkdir -p /etc/bind/zones \
- && mkdir -p /etc/rsync \
- && mkdir -p /var/lib/dhcp \
- && mkdir -p /etc/dhcp \
- && apt-get update \
+RUN apt-get update \
+# && mkdir /script/ \
+# && mkdir -p /etc/bind/zones \
+# && mkdir -p /etc/rsync \
+# && mkdir -p /var/lib/dhcp \
+# && mkdir -p /etc/dhcp \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
  && apt-get install -y bind9 \
