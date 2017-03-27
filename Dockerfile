@@ -20,7 +20,7 @@ RUN apt-get update \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
  && touch /var/lib/dhcp/dhcpd.leases
-VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
+#VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
 #COPY /script/dns-dhcp.sh /script/dns-dhcp.sh
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
