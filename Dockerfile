@@ -8,7 +8,7 @@ USER root
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
- && apt-get install -y bind \
+ && apt-get install -y bind9 \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* 
 RUN mkdir /script/
