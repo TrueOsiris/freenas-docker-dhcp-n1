@@ -12,6 +12,7 @@ RUN apt-get update \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* 
 RUN mkdir /script/
+RUN mkdir /etc/bind/zones
 RUN mkdir /etc/rsync
 RUN touch /var/lib/dhcp/dhcpd.leases
 VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
