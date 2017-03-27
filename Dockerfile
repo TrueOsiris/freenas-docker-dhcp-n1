@@ -23,7 +23,7 @@ LABEL description="This image is used to launch the isc-dhcp-server & the bind9 
               \"env\": \"HOSTNAME\",                        \
               \"descr\": \"Container Hostname\",            \
               \"optional\": true				      \
-          }                                                 \
+          },                                                 \
           {							            \
               \"env\": \"ALLOWED_NETWORKS\",			\
               \"descr\": \"IP/mask[,IP/mask]\",			\
@@ -38,7 +38,7 @@ LABEL description="This image is used to launch the isc-dhcp-server & the bind9 
               \"env\": \"GUID\",				\
               \"descr\": \"Group ID\",			\
               \"optional\": true				\
-          },							\
+          }							\
       ]"
 USER root
 
