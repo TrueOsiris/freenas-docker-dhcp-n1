@@ -15,7 +15,7 @@ RUN mkdir /script/
 RUN mkdir /etc/bind/zones
 RUN mkdir /etc/rsync
 RUN touch /var/lib/dhcp/dhcpd.leases
-VOLUME ["/var/lib/dhcp:/var/lib/dhcp", "/etc/dhcp:/etc/dhcp", "/etc/bind:/etc/bind", "/etc/rsync:/etc/rsync", "/script:/script"]
+VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
