@@ -52,7 +52,7 @@ RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
  && apt-get install -y bind9 \
- && apt-get install openssh-server \
+ && apt-get install -y openssh-server \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
  && touch /var/lib/dhcp/dhcpd.leases
