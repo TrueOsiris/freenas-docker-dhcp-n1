@@ -48,11 +48,11 @@ USER root
 # && mkdir -p /etc/rsync \
 # && mkdir -p /var/lib/dhcp \
 # && mkdir -p /etc/dhcp \
+# && apt-get install -y openssh-server \
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
  && apt-get install -y bind9 \
- && apt-get install -y openssh-server \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
  && touch /var/lib/dhcp/dhcpd.leases
