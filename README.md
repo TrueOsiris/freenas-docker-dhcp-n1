@@ -7,5 +7,5 @@ git pull https://github.com/TrueOsiris/freenas-docker-dnsdhcp-node1
 
 # create the docker image
 cd freenas-docker-dnsdhcp-node1<br>
-docker build -t dns-dhcp-node1 .
+docker build --tag dns-dhcp-node1:latest --network BRIDGED .
 
