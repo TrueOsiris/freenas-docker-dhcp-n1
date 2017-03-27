@@ -21,6 +21,7 @@ RUN apt-get update \
 
 RUN touch /var/lib/dhcp/dhcpd.leases
 VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
+COPY /script/dns-dhcp.sh /script/dns-dhcp.sh
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
