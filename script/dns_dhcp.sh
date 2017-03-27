@@ -5,8 +5,10 @@
 trap "echo TRAPed signal" HUP INT QUIT TERM
 
 # start service in background here
-/usr/sbin/dhcpd -d --no-pid
 /usr/bin/rsync --daemon --config=/etc/rsync/rsyncd.conf
+#/usr/sbin/dhcpd -d --no-pid
+service isc-dhcp-server start
+service bind9 start
 
 #echo "[hit enter key to exit] or run 'docker stop <container>'"
 #read
