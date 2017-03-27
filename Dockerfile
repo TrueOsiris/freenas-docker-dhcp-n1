@@ -3,7 +3,43 @@
 # relevant files flow from main to backup via rsync.
 
 FROM ubuntu:latest
-LABEL description="This image is used to launch the isc-dhcp-server & the bind9 named/dns server" version="1.0" maintainer="tim@chaubet.be"
+LABEL description="This image is used to launch the isc-dhcp-server & the bind9 named/dns server" \
+      version="1.0" \
+      maintainer="tim@chaubet.be" \
+      org.freenas.interactive="true" \
+      org.freenas.upgradeable="true"		\
+      org.freenas.expose-ports-at-host="true"	\
+      org.freenas.autostart="true"		\
+      org.freenas.capabilities-add="NET_BROADCAST" \
+      org.freenas.volumes="[					\
+          {							\
+              \"name\": \"/config\",				\
+              \"descr\": \"Config storage space\"		\
+          }
+      ]"
+      org.freenas.settings="[ 					\
+          { \
+              \"env\": \"HOSTNAME\", \
+              \"descr\": \"Container Hostname\",  \
+              \"optional\": true				\
+          } \
+          {							\
+              \"env\": \"ALLOWED_NETWORKS\",			\
+              \"descr\": \"IP/mask[,IP/mask]\",			\
+              \"optional\": true				\
+          },							\
+          {							\
+              \"env\": \"PUID\",				\
+              \"descr\": \"User ID\",			\
+              \"optional\": true				\
+          },							\
+          {							\
+              \"env\": \"GUID\",				\
+              \"descr\": \"Group ID\",			\
+              \"optional\": true				\
+          },							\
+      ]"
+      org.freenas.bridged
 USER root
 
 
