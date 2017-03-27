@@ -10,11 +10,14 @@ trap "echo TRAPed signal" HUP INT QUIT TERM
 service isc-dhcp-server start
 service bind9 start
 
-#echo "[hit enter key to exit] or run 'docker stop <container>'"
-#read
+echo "[hit enter key to exit] or run 'docker stop <container>'"
+read
 
 # stop service and clean up here
 #echo "stopping apache"
 #/usr/sbin/apachectl stop
+/usr/bin/rsync stop
+service isc-dhcp-server stop
+service bind9 stop
 
 echo "exited $0"
