@@ -4,7 +4,7 @@
 
 FROM ubuntu:latest
 
-MAINTAINER tim@chaubet.be
+# MAINTAINER tim@chaubet.be
 
 RUN apt-get update \
  && apt-get upgrade -y \
@@ -18,3 +18,4 @@ VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync"]
 
 ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
+
