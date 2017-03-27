@@ -5,15 +5,20 @@
 FROM ubuntu:latest
 LABEL description="This image is used to launch the isc-dhcp-server & the bind9 named/dns server" version="1.0" maintainer="tim@chaubet.be"
 USER root
+
+RUN mkdir /script/
+RUN mkdir -p /etc/bind/zones
+RUN mkdir -p /etc/rsync
+RUN mkdir -p /var/lib/dhcp
+RUN mkdir -p /etc/dhcp
+
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
  && apt-get install -y bind9 \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* 
-RUN mkdir /script/
-RUN mkdir /etc/bind/zones
-RUN mkdir /etc/rsync
+
 RUN touch /var/lib/dhcp/dhcpd.leases
 VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
 
