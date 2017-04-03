@@ -68,7 +68,9 @@ RUN apt-get update \
 
 ADD base/etc/* /etc/
 # add daemons to runit
-COPY base/script/dns-dhcp.sh /etc/service/dns-dhcp/run
+COPY base/script/dns-dhcp.sh /etc/service/dns-dhcp/run 
+COPY base/script/dns-dhcp.sh /scripts/
+
 RUN chmod +x /etc/service/dns-dhcp/run \ 
  && cp /var/log/cron/config /var/log/dns-dhcp/ 
 
