@@ -74,4 +74,4 @@ ADD base/script/* /scripts/
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
-ENTRYPOINT ["/script/dns-dhcp.sh"]
+ENTRYPOINT ["/scripts/dns-dhcp.sh"]
