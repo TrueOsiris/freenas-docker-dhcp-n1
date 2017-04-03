@@ -4,21 +4,31 @@
 
 FROM ubuntu:latest
 LABEL description="This image is used to launch the isc-dhcp-server & the bind9 named/dns server" \
-      version="1.0" \
+      version="0.0.2" \
       maintainer="tim@chaubet.be" \
-      org.freenas.interactive="false" \
+      org.freenas.interactive="true" \
       org.freenas.privileged="false" \
-      org.freenas.upgradeable="false" \
+      org.freenas.upgradeable="true" \
       org.freenas.expose-ports-at-host="true" \
       org.freenas.autostart="true" \
       org.freenas.capabilities-add="NET_BROADCAST" \
+      org.freenas.port-mappings="6000:6000/tcp" \
       org.freenas.volumes="[ \
           { \
               \"name\": \"/config\", \
               \"descr\": \"Config storage space\" \
-          } \
+          }, \
+          {	\
+              \"name\": \"/scripts\", \
+              \"descr\": \"Scripts Volume\" \
+          }	\
       ]" \
       org.freenas.settings="[ \
+          {								\
+              \"env\": \"TZ\",						\
+              \"descr\": \"Timezone - eg Europe/London\",		\
+              \"optional\": true					\
+          },								\
           { \
               \"env\": \"HOSTNAME\", \
               \"descr\": \"Container Hostname\", \
@@ -35,7 +45,7 @@ LABEL description="This image is used to launch the isc-dhcp-server & the bind9 
               \"optional\": true \
           }, \
           { \
-              \"env\": \"GUID\", \
+              \"env\": \"PGID\", \
               \"descr\": \"Group ID\", \
               \"optional\": true \
           } \
