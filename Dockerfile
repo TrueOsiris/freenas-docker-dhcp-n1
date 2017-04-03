@@ -68,6 +68,7 @@ RUN apt-get update \
  && touch /var/lib/dhcp/dhcpd.leases
 #VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
 #COPY /script/dns-dhcp.sh /script/dns-dhcp.sh
+ADD image-base/etc/* /etc/
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
