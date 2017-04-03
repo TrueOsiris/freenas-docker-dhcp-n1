@@ -65,10 +65,12 @@ RUN apt-get update \
  && apt-get install -y bind9 \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
- && touch /var/lib/dhcp/dhcpd.leases
+ && touch /var/lib/dhcp/dhcpd.leases \
+ && mkdir /scripts
 #VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
 #COPY /script/dns-dhcp.sh /script/dns-dhcp.sh
-ADD image-base/etc/* /etc/
+ADD base/etc/* /etc/
+ADD base/script/* /scripts/
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
