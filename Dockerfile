@@ -7,6 +7,7 @@ LABEL description="This image is used to launch the isc-dhcp-server & the bind9 
       version="0.0.2" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="true" \
+      org.freenas.version="0.0.2" \
       org.freenas.privileged="false" \
       org.freenas.upgradeable="true" \
       org.freenas.expose-ports-at-host="true" \
@@ -52,25 +53,25 @@ LABEL description="This image is used to launch the isc-dhcp-server & the bind9 
       ]"
 USER root
 
-
-# && mkdir /script/ \
-# && mkdir -p /etc/bind/zones \
-# && mkdir -p /etc/rsync \
-# && mkdir -p /var/lib/dhcp \
-# && mkdir -p /etc/dhcp \
-# && apt-get install -y openssh-server \
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
  && apt-get install -y bind9 \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /tmp/* /var/tmp/* \
  && touch /var/lib/dhcp/dhcpd.leases \
- && mkdir /scripts
+ && mkdir -p /etc/service/dns-dhcp /var/log/dns-dhcp ; sync
+ 
 #VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
 #COPY /script/dns-dhcp.sh /script/dns-dhcp.sh
+
 ADD base/etc/* /etc/
-ADD base/script/* /scripts/
+# add daemons to runit
+COPY base/script/dns-dhcp.sh /etc/service/dns-dhcp/run
+RUN chmod +x /etc/service/dns-dhcp/run \ 
+ && cp /var/log/cron/config /var/log/dns-dhcp/ 
+
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
