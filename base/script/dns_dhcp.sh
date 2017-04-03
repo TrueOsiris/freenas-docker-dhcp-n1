@@ -2,7 +2,7 @@
 
 # USE the trap if you need to also do manual cleanup after the service is stopped,
 #     or need to start multiple services in the one container
-ECHO "##### running /script/dns_dhcp.sh ######"
+echo "##### running /script/dns_dhcp.sh ######"
 #trap "echo TRAPed signal" HUP INT QUIT TERM
 
 # start service in background here
