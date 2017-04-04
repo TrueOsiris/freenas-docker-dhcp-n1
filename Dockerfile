@@ -1,6 +1,6 @@
-# dns & dhcp servers: isc-dhcp-server & bind9
+# dhcp server: isc-dhcp-server
 # split in 2 nodes: 1 main & 1 backup.
-# relevant files flow from main to backup via rsync.
+# relevant files should flow from main to backup via rsync.
 
 FROM ubuntu:latest
 MAINTAINER Tim Chaubet "tim@chaubet.be"
