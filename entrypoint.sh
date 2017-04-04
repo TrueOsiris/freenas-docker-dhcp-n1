@@ -9,6 +9,7 @@ echo "##### running /script/dns_dhcp.sh ######"
 #/usr/bin/rsync --daemon --config=/etc/rsync/rsyncd.conf
 #/usr/sbin/sshd -D
 service isc-dhcp-server start
+/usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid >> /config/dhcp.log 2>> /config/dhcp.log
 #service bind9 start
 
 echo "[hit enter key to exit] or run 'docker stop <container>'"
