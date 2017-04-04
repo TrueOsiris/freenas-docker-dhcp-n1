@@ -37,7 +37,6 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
       ]" \
       org.freenas.volumes="[ \
           { \
-
               \"name\": \"/config\", \
               \"descr\": \"Config storage space\" \
           }, \
