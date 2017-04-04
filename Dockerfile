@@ -68,8 +68,8 @@ RUN apt-get update \
 
 #ADD base/etc/* /etc/
 # add daemons to runit
-COPY dns-dhcp.sh /etc/service/dns-dhcp/run 
-COPY dns-dhcp.sh /scripts/
+COPY dns_dhcp.sh /etc/service/dns-dhcp/run 
+COPY dns_dhcp.sh /scripts/
 
 RUN chmod +x /etc/service/dns-dhcp/run \ 
  && cp /var/log/cron/config /var/log/dns-dhcp/ 
@@ -77,4 +77,4 @@ RUN chmod +x /etc/service/dns-dhcp/run \
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
-ENTRYPOINT ["/scripts/dns-dhcp.sh"]
+ENTRYPOINT ["/scripts/dns_dhcp.sh"]
