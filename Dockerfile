@@ -78,6 +78,7 @@ COPY dns_dhcp.sh /scripts/
 RUN chmod +x /etc/service/dns-dhcp/run 
 # && cp /var/log/cron/config /var/log/dns-dhcp/
 
+# test VOLUME parameter
 #VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
 EXPOSE 67 68
 
