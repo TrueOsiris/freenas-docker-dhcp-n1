@@ -75,8 +75,8 @@ RUN apt-get update \
 RUN mkdir -p /etc/service/dns-dhcp /var/log/dns-dhcp ; sync
 COPY dns_dhcp.sh /etc/service/dns-dhcp/run
 COPY dns_dhcp.sh /scripts/
-RUN chmod +x /etc/service/dns-dhcp/run \
- && cp /var/log/cron/config /var/log/dns-dhcp/
+RUN chmod +x /etc/service/dns-dhcp/run 
+# && cp /var/log/cron/config /var/log/dns-dhcp/
 
 VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
 EXPOSE 67 68
