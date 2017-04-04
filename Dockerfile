@@ -11,7 +11,7 @@ LABEL description="This image is used to launch the isc-dhcp-server & the bind9 
       org.freenas.privileged="false" \
       org.freenas.upgradeable="true" \
       org.freenas.expose-ports-at-host="true" \
-      org.freenas.autostart="true" \
+      org.freenas.autostart="false" \
       org.freenas.capabilities-add="NET_BROADCAST" \
       org.freenas.port-mappings="6000:6000/tcp" \
       org.freenas.volumes="[ \
@@ -66,10 +66,10 @@ RUN apt-get update \
 #VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
 #COPY /script/dns-dhcp.sh /script/dns-dhcp.sh
 
-ADD base/etc/* /etc/
+#ADD base/etc/* /etc/
 # add daemons to runit
-COPY base/script/dns-dhcp.sh /etc/service/dns-dhcp/run 
-COPY base/script/dns-dhcp.sh /scripts/
+COPY dns-dhcp.sh /etc/service/dns-dhcp/run 
+COPY dns-dhcp.sh /scripts/
 
 RUN chmod +x /etc/service/dns-dhcp/run \ 
  && cp /var/log/cron/config /var/log/dns-dhcp/ 
