@@ -2,7 +2,8 @@
 # split in 2 nodes: 1 main & 1 backup.
 # relevant files should flow from main to backup via rsync.
 
-FROM ubuntu:latest
+# FROM ubuntu:latest
+FROM quantumobject/docker-baseimage:16.04
 MAINTAINER Tim Chaubet "tim@chaubet.be"
 
 # Freenas container metadata
@@ -79,4 +80,5 @@ EXPOSE 67 68
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
-ENTRYPOINT ["/scripts/entrypoint.sh"]
+#ENTRYPOINT ["/scripts/entrypoint.sh"]
+CMD ["/sbin/my_init"]
