@@ -10,4 +10,5 @@ cd freenas-docker-dnsdhcp-node1<br>
 docker build --tag dns-dhcp-node1:latest .
 
 # References used
-https://github.com/rubberbird/docker-zoneminder (thanks a lot)
+https://github.com/freenas/docker-images
+https://github.com/rubberbird/docker-zoneminder
