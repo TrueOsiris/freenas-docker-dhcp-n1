@@ -11,23 +11,14 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
       version="0.0.2" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="true" \
+      org.freenas.command="/bin/sh" \
       org.freenas.version="2" \
       org.freenas.privileged="false" \
-      org.freenas.upgradeable="true" \
+      org.freenas.upgradeable="false" \
       org.freenas.expose-ports-at-host="true" \
       org.freenas.autostart="false" \
       org.freenas.port-mappings="67:67/udp,68:68/udp" \
       org.freenas.settings="[ \
-          {								\
-              \"env\": \"TZ\",						\
-              \"descr\": \"Timezone - eg Europe/London\",		\
-              \"optional\": true					\
-          },								\
-          { \
-              \"env\": \"HOSTNAME\", \
-              \"descr\": \"Container Hostname\", \
-              \"optional\": true \
-          }, \
           { \
               \"env\": \"ALLOWED_NETWORKS\", \
               \"descr\": \"IP/mask[,IP/mask]\", \
@@ -43,19 +34,30 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
               \"descr\": \"Group ID\", \
               \"optional\": true \
           } \
+      ]" \
+      org.freenas.volumes="[ \
+          { \
+
+              \"name\": \"/config\", \
+              \"descr\": \"Config storage space\" \
+          }, \
+          {	\
+              \"name\": \"/scripts\", \
+              \"descr\": \"Scripts Volume\" \
+          }	\
+      ]" \
+      org.freenas.static-volumes="[ \
+          { \
+              \"container_path\": \"/dev/rtc\",				\
+              \"host_path\": \"/dev/rtc\",				\
+              \"readonly\": \"true\"					\
+          } \
       ]"
-      #org.freenas.volumes="[ \
-      #    { \
-      #        \"name\": \"/config\", \
-      #        \"descr\": \"Config storage space\" \
-      #    }, \
-      #    {	\
-      #        \"name\": \"/scripts\", \
-      #        \"descr\": \"Scripts Volume\" \
-      #    }	\
-      #]" \
       #org.freenas.capabilities-add="NET_BROADCAST" \
-      
+      #org.freenas.web-ui-protocol="http" \
+      #org.freenas.web-ui-port="80" \
+      #org.freenas.web-ui-path="zm" \
+
 USER root
 
 #add repository and update the container
@@ -66,21 +68,19 @@ RUN apt-get update \
  && apt-get autoclean && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /tmp/* /var/tmp/* \
- && touch /var/lib/dhcp/dhcpd.leases \
- && mkdir -p /etc/service/dns-dhcp /var/log/dns-dhcp ; sync
+ && touch /var/lib/dhcp/dhcpd.leases
  #&& apt-get install -y bind9 \
- 
-#VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/etc/bind", "/etc/rsync", "/script"]
-#COPY /script/dns-dhcp.sh /script/dns-dhcp.sh
 
 #ADD base/etc/* /etc/
 # add daemons to runit
-COPY dns_dhcp.sh /etc/service/dns-dhcp/run 
+RUN mkdir -p /etc/service/dns-dhcp /var/log/dns-dhcp ; sync
+COPY dns_dhcp.sh /etc/service/dns-dhcp/run
 COPY dns_dhcp.sh /scripts/
+RUN chmod +x /etc/service/dns-dhcp/run \
+ && cp /var/log/cron/config /var/log/dns-dhcp/
 
-RUN chmod +x /etc/service/dns-dhcp/run \ 
- && cp /var/log/cron/config /var/log/dns-dhcp/ 
-
+VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
+EXPOSE 67 68
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
 #ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
