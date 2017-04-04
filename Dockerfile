@@ -78,7 +78,7 @@ COPY dns_dhcp.sh /scripts/
 RUN chmod +x /etc/service/dns-dhcp/run 
 # && cp /var/log/cron/config /var/log/dns-dhcp/
 
-VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
+#VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
 EXPOSE 67 68
 
 #ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
