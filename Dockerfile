@@ -57,7 +57,7 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
       #org.freenas.web-ui-port="80" \
       #org.freenas.web-ui-path="zm" \
 
-USER root
+#USER root
 
 #add repository and update the container
 #Installation of nesesary package/software for this containers...
