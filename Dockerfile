@@ -86,9 +86,6 @@ RUN chmod +x /etc/service/ntp/run \
     && cp /var/log/cron/config /var/log/ntp/ \
     && chown -R nobody /var/log/ntp
 
-COPY entrypoint.sh /scripts/
-ADD entrypoint.sh /scripts/
-
 #######################
 ### startup scripts ###
 #######################
