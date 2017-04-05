@@ -12,5 +12,6 @@ else
         
         #needed to fix problem with ubuntu ... and cron 
         update-locale
+        cp test.txt /config/test.txt
         date > /config/configured
 fi
