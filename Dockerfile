@@ -13,7 +13,6 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
       version="0.0.2" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="true" \
-      org.freenas.command="/usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid" \
       org.freenas.version="2" \
       org.freenas.privileged="false" \
       org.freenas.upgradeable="false" \
@@ -58,6 +57,7 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
       #org.freenas.web-ui-protocol="http" \
       #org.freenas.web-ui-port="80" \
       #org.freenas.web-ui-path="zm" \
+      #org.freenas.command="/usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid" \
 
 #USER root
 
@@ -66,7 +66,8 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
- && apt-get autoclean && apt-get autoremove -y \
+ && apt-get autoclean -y \
+ && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /tmp/* /var/tmp/* \
  && touch /var/lib/dhcp/dhcpd.leases
@@ -88,7 +89,12 @@ RUN chmod +x /etc/service/ntp/run \
 COPY entrypoint.sh /scripts/
 ADD entrypoint.sh /scripts/
 
-# startup scripts
+#######################
+### startup scripts ###
+#######################
+
+#Pre-config scrip that maybe need to be run one time only when the container run the first time .. using a flag to don't 
+#run it again ... use for conf for service ... when run the first time ...
 RUN mkdir -p /etc/my_init.d
 COPY startup.sh /etc/my_init.d/startup.sh
 RUN chmod +x /etc/my_init.d/startup.sh
