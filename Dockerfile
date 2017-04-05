@@ -107,12 +107,11 @@ RUN chmod +x /etc/my_init.d/startup.sh
 #    && /bin/bash -c /sbin/pre-conf \
 #    && rm /sbin/pre-conf
     
-
-
-
 #VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
 # volumes defined here are created AT container start
 VOLUME /var/test
+
+COPY test.txt /var/test/
 
 # expose ports to the outside
 EXPOSE 67 68
