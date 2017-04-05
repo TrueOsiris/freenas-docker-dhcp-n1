@@ -18,6 +18,9 @@ else
         if [ ! -f /config/dhcp/dhcp-docker.log ]; then
             touch /config/dhcp/dhcp-docker.log
         fi
+        if [ ! -f /config/dhcp/dhcp-startup.log ]; then
+            touch /config/dhcp/dhcp-startup.log
+        fi
         killall dhcpd
         sleep 5s
         chmod -R 775 /config/dhcp
