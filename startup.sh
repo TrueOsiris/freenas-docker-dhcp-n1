@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e
 
 if [ -f /config/containter_created.txt ]; then
