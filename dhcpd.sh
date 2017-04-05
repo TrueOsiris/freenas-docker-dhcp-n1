@@ -25,4 +25,4 @@
 
 #echo "exited $0"
 
-exec 2>&1 chpst -u root /usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf
+exec 2>&1 chpst -u root /usr/sbin/dhcpd -cf /config/dhcpd.conf
