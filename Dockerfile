@@ -1,6 +1,5 @@
 # dhcp server: isc-dhcp-server
-# WORK IN PROGRESS
-# split in 2 nodes: 1 main & 1 backup.
+# WORK IN PROGRESS # split in 2 nodes: 1 main & 1 backup.
 # relevant files should flow from main to backup via rsync.
 #/usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid
 
@@ -26,22 +25,7 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
               \"env\": \"TZ\",						\
               \"descr\": \"Timezone - eg Europe/London\",		\
               \"optional\": false					      \
-          }, \		
-          { \
-              \"env\": \"ALLOWED_NETWORKS\", \
-              \"descr\": \"IP/mask[,IP/mask]\", \
-              \"optional\": true \
-          }, \
-          { \
-              \"env\": \"PUID\", \
-              \"descr\": \"User ID\", \
-              \"optional\": true \
-          }, \
-          { \
-              \"env\": \"PGID\", \
-              \"descr\": \"Group ID\", \
-              \"optional\": true \
-          } \
+          } \		
       ]" \
       org.freenas.volumes="[ \
           { \
@@ -49,18 +33,6 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
               \"descr\": \"Config storage space\" \
           } \
       ]" 
-      #org.freenas.static-volumes="[ \
-      #    { \
-      #        \"container_path\": \"/dev/rtc\",				\
-      #        \"host_path\": \"/dev/rtc\",				\
-      #        \"readonly\": \"true\"					\
-      #    } \
-      #]"
-      #org.freenas.capabilities-add="NET_BROADCAST" \
-      #org.freenas.web-ui-protocol="http" \
-      #org.freenas.web-ui-port="80" \
-      #org.freenas.web-ui-path="zm" \
-      #org.freenas.command="/usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid" \
 
 #USER root
 
@@ -116,6 +88,7 @@ RUN chmod +x /etc/my_init.d/startup.sh
 # volumes defined here are created AT container start
 #VOLUME /var/test
 #COPY test.txt /var/test/
+ADD test.txt /tmp/
 
 # expose ports
 EXPOSE 67 68
