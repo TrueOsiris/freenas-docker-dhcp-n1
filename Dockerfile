@@ -2,13 +2,13 @@
 # WORK IN PROGRESS
 # split in 2 nodes: 1 main & 1 backup.
 # relevant files should flow from main to backup via rsync.
+#/usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid
 
-# FROM ubuntu:latest
 FROM quantumobject/docker-baseimage:16.04
 MAINTAINER Tim Chaubet "tim@chaubet.be"
 
 # Freenas container metadata
-#/usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid
+# volumes defined here are created BEFORE container start
 LABEL description="This image is used to launch the isc-dhcp-server service" \
       version="0.0.2" \
       maintainer="tim@chaubet.be" \
@@ -66,6 +66,8 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y isc-dhcp-server \
+                       ntp \
+                       ntpdate \
  && apt-get autoclean -y \
  && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
@@ -85,6 +87,8 @@ COPY ntp.sh /etc/service/ntp/run
 RUN chmod +x /etc/service/ntp/run \
     && cp /var/log/cron/config /var/log/ntp/ \
     && chown -R nobody /var/log/ntp
+    
+COPY test.txt /config/
 
 #######################
 ### startup scripts ###
@@ -105,8 +109,9 @@ RUN chmod +x /etc/my_init.d/startup.sh
     
 
 
-# test VOLUME parameter
+
 #VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
+# volumes defined here are created AT container start
 VOLUME /var/test
 
 # expose ports to the outside
