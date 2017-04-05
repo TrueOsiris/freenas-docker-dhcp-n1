@@ -45,7 +45,7 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
               \"name\": \"/scripts\", \
               \"descr\": \"Scripts Volume\" \
           }	\
-      ]" \
+      ]" 
       #org.freenas.static-volumes="[ \
       #    { \
       #        \"container_path\": \"/dev/rtc\",				\
