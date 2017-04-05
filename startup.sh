@@ -15,6 +15,8 @@ else
         if [ ! -f /config/dhcp/dhcpd.conf.synced ]; then
             cp /tmp/dhcpd.conf.synced /config/dhcp/dhcpd.conf.synced
         fi
+        killall dhcpd
+        sleep 5s
         chmod -R 775 /config/dhcp
         update-locale
         date > /config/container_created.txt
