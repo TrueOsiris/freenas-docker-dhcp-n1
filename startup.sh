@@ -15,9 +15,13 @@ else
         if [ ! -f /config/dhcp/dhcpd.conf.synced ]; then
             cp /tmp/dhcpd.conf.synced /config/dhcp/dhcpd.conf.synced
         fi
+        if [ ! -f /config/dhcp/dhcp-docker.log ]; then
+            touch /config/dhcp/dhcp-docker.log
+        fi
         killall dhcpd
         sleep 5s
         chmod -R 775 /config/dhcp
         update-locale
-        date > /config/container_created.txt
+        echo "do not remove this file." > /config/container_created.txt
+        date >> /config/container_created.txt
 fi
