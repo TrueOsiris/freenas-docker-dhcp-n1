@@ -110,13 +110,13 @@ RUN chmod +x /etc/my_init.d/startup.sh
 #    && /bin/bash -c /sbin/pre-conf \
 #    && rm /sbin/pre-conf
     
-#VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
+# the normal syntax does not work: VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
 # volumes defined here are created AT container start
-VOLUME /var/test
+#VOLUME /var/test
 
 COPY test.txt /var/test/
 
-# expose ports to the outside
+# expose ports
 EXPOSE 67 68
 
 RUN echo "!/bin/sh ntpdate 0.europe.pool.ntp.org" >> /etc/cron.daily/ntpdate \
