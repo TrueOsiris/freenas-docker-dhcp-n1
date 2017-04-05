@@ -92,7 +92,8 @@ RUN chmod +x /etc/my_init.d/startup.sh
 # volumes defined here are created AT container start
 #VOLUME /var/test
 #COPY test.txt /var/test/
-ADD test.txt /tmp/
+ADD dhcpd.conf /tmp/
+ADD dhcpd.conf.synced /tmp/
 
 # expose ports
 EXPOSE 67 68
