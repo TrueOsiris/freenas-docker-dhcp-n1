@@ -91,7 +91,9 @@ RUN chmod +x /etc/service/ntp/run \
     && cp /var/log/cron/config /var/log/ntp/ \
     && chown -R nobody /var/log/ntp
     
-COPY test.txt /config/
+# Copying with the COPY method to a volume does not work
+# since the volume does not exist yet.
+#COPY test.txt /config/
 
 #######################
 ### startup scripts ###
@@ -113,8 +115,7 @@ RUN chmod +x /etc/my_init.d/startup.sh
 # the normal syntax does not work: VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
 # volumes defined here are created AT container start
 #VOLUME /var/test
-
-COPY test.txt /var/test/
+#COPY test.txt /var/test/
 
 # expose ports
 EXPOSE 67 68
