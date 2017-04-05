@@ -63,6 +63,10 @@ RUN chmod +x /etc/service/ntp/run \
     && cp /var/log/cron/config /var/log/ntp/ \
     && chown -R nobody /var/log/ntp
     
+# copy dhcp config files
+COPY dhcpd.conf /tmp/dhcpd.conf
+COPY dhcpd.conf.synced /tmp/dhcpd.conf.synced
+
 # Copying with the COPY method to a volume does not work
 # since the volume does not exist yet.
 #COPY test.txt /config/
