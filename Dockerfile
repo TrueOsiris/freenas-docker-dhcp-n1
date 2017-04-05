@@ -16,10 +16,17 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
       org.freenas.version="2" \
       org.freenas.privileged="false" \
       org.freenas.upgradeable="false" \
+      org.freenas.bridged="true" \
+      org.freenas.dhcp="false" \
       org.freenas.expose-ports-at-host="true" \
       org.freenas.autostart="false" \
       org.freenas.port-mappings="67:67/udp,68:68/udp" \
       org.freenas.settings="[ \
+          { \
+              \"env\": \"TZ\",						\
+              \"descr\": \"Timezone - eg Europe/London\",		\
+              \"optional\": false					      \
+          }, \		
           { \
               \"env\": \"ALLOWED_NETWORKS\", \
               \"descr\": \"IP/mask[,IP/mask]\", \
@@ -40,11 +47,7 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
           { \
               \"name\": \"/config\", \
               \"descr\": \"Config storage space\" \
-          }, \
-          {	\
-              \"name\": \"/scripts\", \
-              \"descr\": \"Scripts Volume\" \
-          }	\
+          } \
       ]" 
       #org.freenas.static-volumes="[ \
       #    { \
