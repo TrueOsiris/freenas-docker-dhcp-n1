@@ -1,18 +1,16 @@
 set -e
 
-if [ -f /etc/configured ]; then
+if [ -f /config/configured ]; then
         echo 'already configured'
-        
-        /sbin/zm.sh&
 else      
         #check if Directories inside of /etc/dhcp are present.
-        if [ ! -d /etc/dhcp ]; then
-           mkdir -p /etc/dhcp
+        if [ ! -d /config/dhcp ]; then
+           mkdir -p /config/dhcp
         fi
         
-        chmod -R 770 /etc/dhcp
+        chmod -R 770 /config/dhcp
         
         #needed to fix problem with ubuntu ... and cron 
         update-locale
-        date > /etc/configured
+        date > /config/configured
 fi
