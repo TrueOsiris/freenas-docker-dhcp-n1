@@ -2,7 +2,7 @@
 
 set -e
 
-if [ -f /config/containter_created.txt ]; then
+if [ -f /config/dhcp_setup_do_not_remove.txt ]; then
         echo 'already configured'
 else      
         #check if Directories inside of /etc/dhcp are present.
@@ -30,6 +30,6 @@ else
         #sleep 5s
         chmod -R 775 /config/dhcp
         update-locale
-        echo "do not remove this file." > /config/container_created.txt
-        date >> /config/container_created.txt
+        echo "do not remove this file." > /config/dhcp_setup_do_not_remove.txt
+        date >> /config/dhcp_setup_do_not_remove.txt
 fi
