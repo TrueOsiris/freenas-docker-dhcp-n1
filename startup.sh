@@ -3,6 +3,7 @@
 set -e
 
 echo -e "nameserver 10.10.20.20\nnameserver 10.10.30.30\nsearch chaubet\noptions ndots:0" > /etc/resolv.conf
+rm /config/dhcp/dhcpd.pid 1>/dev/null 2>/dev/null 
 
 if [ -f /config/dhcp_setup_do_not_remove.txt ]; then
         echo 'already configured'
