@@ -1,13 +1,8 @@
 # dhcp server: isc-dhcp-server
-# WORK IN PROGRESS # split in 2 nodes: 1 main & 1 backup.
-# relevant files should flow from main to backup via rsync.
-#/usr/sbin/dhcpd -q -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid
-
 FROM quantumobject/docker-baseimage:16.04
 MAINTAINER Tim Chaubet "tim@chaubet.be"
 
-# Freenas container metadata
-# volumes defined here are created BEFORE container start
+# Freenas container metadata - volumes defined here are created BEFORE container start
 LABEL description="This image is used to launch the isc-dhcp-server service" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="true" \
@@ -33,8 +28,6 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
           } \
       ]" 
 
-#USER root
-
 #add repository and update the container
 #Installation of nesesary package/software for this containers...
 RUN apt-get update \
@@ -47,7 +40,6 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /tmp/* /var/tmp/* \
  && touch /var/lib/dhcp/dhcpd.leases
- #&& apt-get install -y bind9 \
 
 # add dhcpd daemon to runit
 RUN mkdir -p /etc/service/dhcpd /var/log/dhcpd ; sync
@@ -68,32 +60,17 @@ COPY dhcpd.conf.synced /tmp/dhcpd.conf.synced
 ADD dhcpd.conf /tmp/
 ADD dhcpd.conf.synced /tmp/
 
-# Copying with the COPY method to a volume does not work
-# since the volume does not exist yet.
-#COPY test.txt /config/
-
-#######################
 ### startup scripts ###
-#######################
 
 #Pre-config scrip that maybe need to be run one time only when the container run the first time .. using a flag to don't 
 #run it again ... use for conf for service ... when run the first time ...
 RUN mkdir -p /etc/my_init.d
 COPY startup.sh /etc/my_init.d/startup.sh
 RUN chmod +x /etc/my_init.d/startup.sh
-
-#pre-config scritp for different service that need to be run when container image is create 
-#maybe include additional software that need to be installed ... with some service running ... like example mysqld
-#COPY pre-conf.sh /sbin/pre-conf
-#RUN chmod +x /sbin/pre-conf ; sync \
-#    && /bin/bash -c /sbin/pre-conf \
-#    && rm /sbin/pre-conf
     
 # the normal syntax does not work: VOLUME ["/var/lib/dhcp", "/etc/dhcp", "/scripts"]
 # volumes defined here are created AT container start
 #VOLUME /var/test
-#COPY test.txt /var/test/
-
 
 # expose ports
 EXPOSE 67 68
@@ -101,7 +78,4 @@ EXPOSE 67 68
 RUN echo "!/bin/sh ntpdate 0.europe.pool.ntp.org" >> /etc/cron.daily/ntpdate \
     && chmod 750 /etc/cron.daily/ntpdate
 
-#ENTRYPOINT ["/usr/sbin/dhcpd", "-d", "--no-pid"]
-#ENTRYPOINT ["/usr/bin/rsync", "--daemon", "--config=/etc/rsync/rsyncd.conf"]
-#ENTRYPOINT ["/scripts/entrypoint.sh"]
 CMD ["/sbin/my_init"]
