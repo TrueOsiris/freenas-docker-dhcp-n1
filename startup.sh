@@ -23,6 +23,9 @@ else
             #touch /config/dhcp/dhcp-startup.log
             date > /config/dhcp/dhcp-startup.log
         fi        
+        if [ ! -f /config/dhcp/dhcpd.leases ]; then
+            touch /config/dhcp/dhcpd.leases
+        fi        
         #killall dhcpd
         #sleep 5s
         chmod -R 775 /config/dhcp
