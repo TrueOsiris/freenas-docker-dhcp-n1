@@ -4,6 +4,7 @@ MAINTAINER Tim Chaubet "tim@chaubet.be"
 
 # Freenas container metadata - volumes defined here are created BEFORE container start
 LABEL description="This image is used to launch the isc-dhcp-server service" \
+      version="0.0.5" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="false" \
       org.freenas.version="0.0.5" \
