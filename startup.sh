@@ -23,10 +23,11 @@ else
             #touch /config/dhcp/dhcp-startup.log
             date > /config/dhcp/dhcp-startup.log
         fi
-        if [ ! -f /config/dhcp/dhcpd.pid ]; then
+        #if [ ! -f /config/dhcp/dhcpd.pid ]; then
             #touch /config/dhcp/dhcpd.pid
-            date > /config/dhcp/dhcpd.pid
-        fi
+        #    date > /config/dhcp/dhcpd.pid
+        #fi
+        
         #killall dhcpd
         #sleep 5s
         chmod -R 775 /config/dhcp
