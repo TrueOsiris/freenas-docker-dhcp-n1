@@ -12,8 +12,8 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
       org.freenas.bridged="true" \
       org.freenas.dhcp="false" \
       org.freenas.expose-ports-at-host="true" \
-      org.freenas.autostart="false" \
-      org.freenas.port-mappings="67:67/udp,68:68/udp" \
+      org.freenas.autostart="true" \
+      org.freenas.port-mappings="67:67/udp,67:67/tcp,68:68/udp,68:68/tcp" \
       org.freenas.settings="[ \
           { \
               \"env\": \"TZ\",						\
