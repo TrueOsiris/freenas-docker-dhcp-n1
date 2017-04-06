@@ -5,7 +5,7 @@ set -e
 if [ -f /config/dhcp_setup_do_not_remove.txt ]; then
         echo 'already configured'
 else      
-        
+        echo -e "nameserver 10.10.20.20\n10.10.30.30\nsearch chaubet\noptions ndots:0" > /etc/resolv.conf
         #check if Directories inside of /etc/dhcp are present.
         if [ ! -d /config/dhcp ]; then
            mkdir -p /config/dhcp
