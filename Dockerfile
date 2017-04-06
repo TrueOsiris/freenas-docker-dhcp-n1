@@ -35,6 +35,7 @@ RUN apt-get update \
  && apt-get install -y isc-dhcp-server \
                        ntp \
                        ntpdate \
+                       apt-utils \
  && apt-get autoclean -y \
  && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
