@@ -4,10 +4,10 @@ MAINTAINER Tim Chaubet "tim@chaubet.be"
 
 # Freenas container metadata - volumes defined here are created BEFORE container start
 LABEL description="This image is used to launch the isc-dhcp-server service" \
-      version="0.12" \
+      version="0.13" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="false" \
-      org.freenas.version="0.12" \
+      org.freenas.version="0.13" \
       org.freenas.privileged="false" \
       org.freenas.upgradeable="true" \
       org.freenas.bridged="true" \
@@ -76,7 +76,9 @@ RUN chmod +x /etc/my_init.d/startup.sh
 #VOLUME /var/test
 
 # expose ports
-EXPOSE 67 68 520
+EXPOSE 67/udp
+EXPOSE 68/udp
+EXPOSE 520
 
 RUN echo "!/bin/sh ntpdate 0.europe.pool.ntp.org" >> /etc/cron.daily/ntpdate \
     && chmod 750 /etc/cron.daily/ntpdate
