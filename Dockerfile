@@ -13,7 +13,7 @@ LABEL description="This image is used to launch the isc-dhcp-server service" \
       org.freenas.dhcp="false" \
       org.freenas.expose-ports-at-host="true" \
       org.freenas.autostart="true" \
-      org.freenas.port-mappings="67:67/udp,67:67/tcp,68:68/udp,68:68/tcp" \
+      org.freenas.port-mappings="67:67/udp,67:67/tcp,68:68/udp,68:68/tcp,520:520/tcp,520:520/udp" \
       org.freenas.settings="[ \
           { \
               \"env\": \"TZ\",						\
@@ -35,7 +35,6 @@ RUN apt-get update \
  && apt-get install -y isc-dhcp-server \
                        ntp \
                        ntpdate \
-                       apt-utils \
  && apt-get autoclean -y \
  && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
@@ -74,7 +73,7 @@ RUN chmod +x /etc/my_init.d/startup.sh
 #VOLUME /var/test
 
 # expose ports
-EXPOSE 67 68
+EXPOSE 67 68 520
 
 RUN echo "!/bin/sh ntpdate 0.europe.pool.ntp.org" >> /etc/cron.daily/ntpdate \
     && chmod 750 /etc/cron.daily/ntpdate
