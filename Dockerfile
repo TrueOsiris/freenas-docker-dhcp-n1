@@ -53,7 +53,8 @@ RUN apt-get update \
 RUN mkdir -p /etc/service/dhcpd /var/log/dhcpd ; sync
 COPY dhcpd.sh /etc/service/dhcpd/run
 RUN chmod +x /etc/service/dhcpd/run \
-    && cp /var/log/cron/config /var/log/dhcpd/ 
+    && cp /var/log/cron/config /var/log/dhcpd/ \
+    && chmod -R nobody /var/log/dhcpd
     
 # to add ntp deamon to runit
 RUN mkdir -p /etc/service/ntp  /var/log/ntp ; sync 
@@ -65,6 +66,8 @@ RUN chmod +x /etc/service/ntp/run \
 # copy dhcp config files
 COPY dhcpd.conf /tmp/dhcpd.conf
 COPY dhcpd.conf.synced /tmp/dhcpd.conf.synced
+ADD dhcpd.conf /tmp/
+ADD dhcpd.conf.synced /tmp/
 
 # Copying with the COPY method to a volume does not work
 # since the volume does not exist yet.
@@ -91,8 +94,7 @@ RUN chmod +x /etc/my_init.d/startup.sh
 # volumes defined here are created AT container start
 #VOLUME /var/test
 #COPY test.txt /var/test/
-ADD dhcpd.conf /tmp/
-ADD dhcpd.conf.synced /tmp/
+
 
 # expose ports
 EXPOSE 67 68
