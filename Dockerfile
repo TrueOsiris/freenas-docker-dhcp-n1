@@ -4,10 +4,10 @@ MAINTAINER Tim Chaubet "tim@chaubet.be"
 
 # Freenas container metadata - volumes defined here are created BEFORE container start
 LABEL description="This image is used to launch the isc-dhcp-server service" \
-      version="0.13" \
+      version="0.14" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="false" \
-      org.freenas.version="0.13" \
+      org.freenas.version="0.14" \
       org.freenas.privileged="false" \
       org.freenas.upgradeable="true" \
       org.freenas.bridged="true" \
@@ -38,11 +38,11 @@ RUN apt-get update \
                        ntpdate \
                        net-tools \
                        iputils-ping \
+                       openssh-server \
  && apt-get autoclean -y \
  && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* \
- && rm -rf /tmp/* /var/tmp/* \
- && touch /var/lib/dhcp/dhcpd.leases
+ && rm -rf /tmp/* /var/tmp/* 
 
 # add dhcpd daemon to runit
 RUN mkdir -p /etc/service/dhcpd /var/log/dhcpd ; sync
