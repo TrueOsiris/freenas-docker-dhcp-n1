@@ -6,7 +6,7 @@ MAINTAINER Tim Chaubet "tim@chaubet.be"
 LABEL description="This image is used to launch the isc-dhcp-server service" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="false" \
-      org.freenas.version="0.16" \
+      org.freenas.version="0.17" \
       org.freenas.privileged="false" \
       org.freenas.upgradeable="true" \
       org.freenas.bridged="true" \
