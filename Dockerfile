@@ -37,6 +37,7 @@ RUN apt-get update \
                        ntpdate \
                        net-tools \
                        iputils-ping \
+                       vim \
                        openssh-server \
  && apt-get autoclean -y \
  && apt-get autoremove -y \
