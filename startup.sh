@@ -16,15 +16,16 @@ else
             cp /tmp/dhcpd.conf.synced /config/dhcp/dhcpd.conf.synced
         fi
         if [ ! -f /config/dhcp/dhcp-docker.log ]; then
-            touch /config/dhcp/dhcp-docker.log
+            #touch /config/dhcp/dhcp-docker.log
             date > /config/dhcp/dhcp-docker.log
         fi
         if [ ! -f /config/dhcp/dhcp-startup.log ]; then
-            touch /config/dhcp/dhcp-startup.log
+            #touch /config/dhcp/dhcp-startup.log
             date > /config/dhcp/dhcp-startup.log
         fi
         if [ ! -f /config/dhcp/dhcpd.pid ]; then
-            touch /config/dhcp/dhcpd.pid
+            #touch /config/dhcp/dhcpd.pid
+            date > /config/dhcp/dhcpd.pid
         fi
         #killall dhcpd
         #sleep 5s
