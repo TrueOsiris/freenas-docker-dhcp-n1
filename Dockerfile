@@ -6,7 +6,7 @@ MAINTAINER Tim Chaubet "tim@chaubet.be"
 LABEL description="This image is used to launch the isc-dhcp-server service" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="false" \
-      org.freenas.version="0.15" \
+      org.freenas.version="0.16" \
       org.freenas.privileged="false" \
       org.freenas.upgradeable="true" \
       org.freenas.bridged="true" \
@@ -76,9 +76,9 @@ RUN chmod +x /etc/my_init.d/startup.sh
 #VOLUME /var/test
 
 # expose ports
-EXPOSE 67/udp
-EXPOSE 68/udp
-EXPOSE 520
+#EXPOSE 67/udp
+#EXPOSE 68/udp
+#EXPOSE 520
 
 RUN echo "!/bin/sh ntpdate 0.europe.pool.ntp.org" >> /etc/cron.daily/ntpdate \
     && chmod 750 /etc/cron.daily/ntpdate
