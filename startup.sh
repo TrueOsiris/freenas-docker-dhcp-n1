@@ -5,6 +5,7 @@ set -e
 if [ -f /config/dhcp_setup_do_not_remove.txt ]; then
         echo 'already configured'
 else      
+        
         #check if Directories inside of /etc/dhcp are present.
         if [ ! -d /config/dhcp ]; then
            mkdir -p /config/dhcp
