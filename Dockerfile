@@ -53,8 +53,7 @@ RUN apt-get update \
 RUN mkdir -p /etc/service/dhcpd /var/log/dhcpd ; sync
 COPY dhcpd.sh /etc/service/dhcpd/run
 RUN chmod +x /etc/service/dhcpd/run \
-    && cp /var/log/cron/config /var/log/dhcpd/ \
-    && chmod -R nobody /var/log/dhcpd
+    && cp /var/log/cron/config /var/log/dhcpd/ 
     
 # to add ntp deamon to runit
 RUN mkdir -p /etc/service/ntp  /var/log/ntp ; sync 
