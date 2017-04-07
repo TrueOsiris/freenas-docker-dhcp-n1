@@ -50,12 +50,18 @@ COPY dhcpd.sh /etc/service/dhcpd/run
 RUN chmod +x /etc/service/dhcpd/run \
     && cp /var/log/cron/config /var/log/dhcpd/ 
     
-# to add ntp deamon to runit
-RUN mkdir -p /etc/service/ntp  /var/log/ntp ; sync 
+# add ntp deamon to runit
+RUN mkdir -p /etc/service/ntp /var/log/ntp ; sync 
 COPY ntp.sh /etc/service/ntp/run
 RUN chmod +x /etc/service/ntp/run \
     && cp /var/log/cron/config /var/log/ntp/ \
     && chown -R nobody /var/log/ntp
+    
+# add openssh-server daemon to runit
+#RUN mkdir -p /etc/service/sshd /var/log/sshd ; sync
+#COPY sshd.sh /etc/service/sshd/run
+#RUN chmod +x /etc/service/sshd/run \
+#    && cp /var/log/cron/config /var/log/sshd/ 
     
 # copy dhcp config files
 COPY dhcpd.conf /tmp/dhcpd.conf
