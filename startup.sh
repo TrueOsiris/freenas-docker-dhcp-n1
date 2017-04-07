@@ -37,6 +37,7 @@ else
         #sleep 5s
         chmod -R 775 /config/dhcp
         update-locale
-        echo "do not remove this file." > /config/dhcp_setup_do_not_remove.txt
+        echo -e "do not remove this file.\nIf you do, root password will be reset to \"test\""
+        echo -e "and /etc/resolv.conf will be reset to my defaults" > /config/dhcp_setup_do_not_remove.txt
         date >> /config/dhcp_setup_do_not_remove.txt
 fi
