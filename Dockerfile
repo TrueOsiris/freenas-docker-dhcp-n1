@@ -6,7 +6,7 @@ MAINTAINER Tim Chaubet "tim@chaubet.be"
 LABEL description="This image is used to launch the isc-dhcp-server service" \
       maintainer="tim@chaubet.be" \
       org.freenas.interactive="false" \
-      org.freenas.version="0.17" \
+      org.freenas.version="0.18" \
       org.freenas.privileged="false" \
       org.freenas.upgradeable="true" \
       org.freenas.bridged="true" \
@@ -58,10 +58,10 @@ RUN chmod +x /etc/service/ntp/run \
     && chown -R nobody /var/log/ntp
     
 # add openssh-server daemon to runit
-#RUN mkdir -p /etc/service/sshd /var/log/sshd ; sync
-#COPY sshd.sh /etc/service/sshd/run
-#RUN chmod +x /etc/service/sshd/run \
-#    && cp /var/log/cron/config /var/log/sshd/ 
+RUN mkdir -p /etc/service/sshd /var/log/sshd ; sync
+COPY sshd.sh /etc/service/sshd/run
+RUN chmod +x /etc/service/sshd/run \
+    && cp /var/log/cron/config /var/log/sshd/ 
     
 # copy dhcp config files
 COPY dhcpd.conf /tmp/dhcpd.conf
