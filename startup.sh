@@ -48,8 +48,8 @@ else
         #sleep 5s
         chmod -R 775 /config/dhcp
         update-locale
-        echo -e "Do not remove this file.\nIf you do, root password will be reset to the one in " \
-                "the config file ssh.pass.\n/etc/resolv.conf will be reset to the one in the config " \
+        echo -e "Do not remove this file.\nIf you do, root password will be reset to the one in" \
+                "the config file ssh.pass.\n/etc/resolv.conf will be reset to the one in the config" \
                 "file.\n" > /config/dhcp.setup.completed
         date >> /config/dhcp.setup.completed
 fi
